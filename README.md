@@ -1,8 +1,15 @@
 # Poker Rules
 
-使用ParserC来描述规则，可以获得巨大的灵活性。
+* 使用ParserC解析Json是无意义的，因为解析Json追求极致的效率，且json的规则不会变化。parserc是不可能快过for循环的代码的。
+* 在游戏领域中，工程追求灵活性和可修改性，使用ParserC来描述棋牌规则，可以获得巨大的灵活性提升。
 
-## 斗地主的主要逻辑
+## 斗地主的牌型检测逻辑
+
+引入的两个操作 `isAnyOf` 和 `isProgressionOf` 属于检测牌型的基础逻辑。
+通过这两个基础操作，搭配parserc(nom库)通用函数，组合变换出高度抽象的逻辑。
+
+source code [Card.res](./src/Card.res)
+
 ```rescript
 // 检测基本牌型
 let isOne = isAnyOf(1)
